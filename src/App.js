@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Clock from './Clock';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
+class App extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            finalData: 'December 31, 2020',
+            newData:''
+        }
+    }
+
+    setNewDate() {
+        this.setState({finalData: this.state.newData});
+        
+    }
+
+    render() { 
+        return ( 
+            <div className = "App-main">
+                <div className = "App-title">
+                    Countdown to {this.state.finalData}
+                </div>
+                <Clock
+                deadline = {this.state.finalData}
+                />
+                <div className = "App-input-form">
+                    <input placeholder = "Enter date"
+                    onChange = {event => this.setState({newData: event.target.value})}
+                    />
+                    <button onClick ={()=> this.setNewDate()}>Submit</button>
+                </div>
+            </div>
+         );
+    }
+}
+ 
 export default App;
